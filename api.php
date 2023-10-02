@@ -1,6 +1,7 @@
 <?php 
 require_once './core/init.php';
 
+use Core\Classes\Skeleton;
 use Core\Classes\Tools;
 
 if($_POST){
@@ -148,12 +149,17 @@ if($_POST){
 			echo json_encode($return);
 		break;
 		case "newproject":
-			$new_project = $_POST['project'];
-			$create_skeleton = $_POST['skeleton'];
+			$new_project 		= $_POST['project'];
+			$create_skeleton 	= $_POST['skeleton'];
+			$skeleton_type 		= $_POST['skeleton_type'];
 
 			if(!file_exists($config->xampp_htdocs.'/'.$_POST['project'])){
 				if($create_skeleton == 'true'){
-					Tools::rcopy('./data/skeleton', $config->xampp_htdocs.'/'.$_POST['project']);
+					$skeleton = Skeleton::get_skeletons();
+
+					$skeleton_name = $skeleton[$skeleton_type]['name'];
+
+					Tools::rcopy('./data/skeleton/'.$skeleton_name, $config->xampp_htdocs.'/'.$_POST['project']);
 					#Poner aqui para la creacion del mysql
 				}else{
 					mkdir($config->xampp_htdocs.'/'.$_POST['project']);
@@ -204,7 +210,10 @@ if($_POST){
 
 			echo json_encode($return);
 		break;
-
+		case "get_skeleton":
+			$skeletons = Skeleton::get_skeletons();
+			echo json_encode($skeletons);
+		break;
 	}
 
 }

@@ -9,7 +9,7 @@ use Core\Classes\Menu;
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <title>cardinal</title>
+        <title>Cardinal</title>
         <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="./assets/css/cardinal.css">
         <link rel="icon" href="favicon.ico">
@@ -108,6 +108,7 @@ use Core\Classes\Menu;
                                 <input type="checkbox" class="custom-control-input" id="skeleton">
                                 <label class="custom-control-label" for="skeleton">Agregar estructura predefinida?</label>
                             </div>
+                            <div id="folders" style="display:none"></div>
                         <?php else: ?>
                             <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
                                     <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">

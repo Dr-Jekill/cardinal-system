@@ -411,17 +411,57 @@ App = () => {
 
 $('#newproject').click(function(){
 	//var skeleton = null;
-	$("#modal-2").modal();		
+	$("#modal-2").modal();	
+	
+	$('#folders').empty();
+
+	$.ajax({
+		url: "./api.php",
+		data:{p:"get_skeleton"},
+		type:'POST',
+		dataType:'json'
+	  }).done(function(data){
+		  $.each(data, function(i, v){
+			$('#folders').append(
+				$('<div>', {
+					'class': 'skeleton_item',
+					'data-element': i,
+					'data-role': 'skeleton'
+				}).append(
+					$('<span>',{
+						'class': 'skeleton_name',
+						'text':v.name
+					})
+				)
+			);
+			if(v.framework!=''){
+				$("<div>",{
+					'class':'recognize '+v.framework,
+					'title':v.framework
+				}).prependTo($('[data-element="'+i+'"]'));
+			}
+		  });
+	  });
 })
+
+$("#skeleton").on('click', function(){
+	if($("#skeleton").is(":checked")){
+		$('#folders').show('slow');
+	}else{
+		$('#folders').hide('slow');
+	}
+});
 
 $('[id="create"]').click(function(){
 	let proyect_name 		= $("#proyect_name").val();
 	var skeleton 	= $("#skeleton").is(":checked");
 
+	let skeleton_folder = $('#folders').find('.active').data('element');
+
 	if(proyect_name.length > 0){
 		$.ajax({
 		  url: "./api.php",
-		  data:{p:"newproject", skeleton:skeleton, project:proyect_name},
+		  data:{p:"newproject", skeleton:skeleton, project:proyect_name, skeleton_type:skeleton_folder},
 		  type:'POST',
 		  dataType:'json'
 		}).done(function(data){
@@ -536,3 +576,8 @@ $('[data-role="search"]').click(function(){
 $('#search').keyup(function(){
 	search.find();
 });
+
+$('#folders').on('click', '.skeleton_item', function(){
+	$('[data-role="skeleton"]').removeClass('active');
+	$(this).addClass('active');
+})

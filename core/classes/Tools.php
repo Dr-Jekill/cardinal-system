@@ -96,6 +96,8 @@ class Tools{
             $framework = 'prestashop';
         }elseif(file_exists("$root_path/core/SysCore.php")){
             $framework = 'omnicore';
+        }elseif(file_exists("$root_path/includes/pages/adm/ShowLoginPage.php")){
+            $framework = 'Xmoons';
         }
     
         return $framework;

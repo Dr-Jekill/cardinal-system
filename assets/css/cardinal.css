@@ -377,7 +377,7 @@ small.version {
     top: 157px;
     background: #ffffff40;
     border-radius: 50%;
-    background-size: 73%;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
     left: 5px;
@@ -403,3 +403,44 @@ small.version {
 .recognize.omnicore{
   background-image: url(../../assets/img/frameworks/omnicore.png);
 }
+
+.recognize.Xmoons{
+  background-image: url(../../assets/img/frameworks/2moons.png);
+}
+
+.skeleton_item {
+  margin: 4px 4px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  box-shadow: 2px 3px 6px -2px #9f9f9f;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  cursor: pointer;
+  background: #fff;
+  transition: .3s all;
+}
+
+div#folders {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.skeleton_item.active {
+  background: #007bff;
+  color: #fff;
+}
+
+.skeleton_item:hover {
+  scale: 1.12;
+}
+
+.skeleton_item .recognize {
+  position: relative;
+  top: 0;
+  left: 0px;
+  margin-right: 10px;
+}
+.custom-switch, .custom-switch *{cursor: pointer;}
